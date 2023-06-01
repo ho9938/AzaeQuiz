@@ -1,8 +1,32 @@
 package com.example.azaequiz;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.mlkit.vision.common.InputImage;
+import com.google.mlkit.vision.text.TextRecognition;
+import com.google.mlkit.vision.text.TextRecognizer;
+import com.google.mlkit.vision.text.Text;
+import com.google.mlkit.vision.text.latin.TextRecognizerOptions;
+
+
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -23,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
 
         imageView = findViewById(R.id.imageView);
         text_info = findViewById(R.id.text_info);
-        recognizer = TextRecognition.getClient();    //텍스트 인식에 사용될 모델
+        recognizer = TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS);    //텍스트 인식에 사용될 모델
 
         // GET IMAGE 버튼
         btn_get_image = findViewById(R.id.btn_get_image);
@@ -72,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void TextRecognition(TextRecognizer recognizer){
-        Task<Text> result = recognizer.process(image)
+        recognizer.process(image)
                 // 이미지 인식에 성공하면 실행되는 리스너
                 .addOnSuccessListener(new OnSuccessListener<Text>() {
                     @Override
