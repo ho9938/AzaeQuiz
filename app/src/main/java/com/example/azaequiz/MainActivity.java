@@ -36,8 +36,8 @@ public class MainActivity extends AppCompatActivity {
     Uri uri;                // 갤러리에서 가져온 이미지에 대한 Uri
     Bitmap bitmap;          // 갤러리에서 가져온 이미지를 담을 비트맵
     InputImage image;       // ML 모델이 인식할 인풋 이미지
-    TextView text_info;     // ML 모델이 인식한 텍스트를 보여줄 뷰
-    Button btn_get_image, btn_detection_image;  // 이미지 가져오기 버튼, 이미지 인식 버튼
+    TextView textInfo;     // ML 모델이 인식한 텍스트를 보여줄 뷰
+    Button getImage, changeToText;  // 이미지 가져오기 버튼, 이미지 인식 버튼
     TextRecognizer recognizer;    //텍스트 인식에 사용될 모델
 
     @Override
@@ -46,12 +46,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         imageView = findViewById(R.id.imageView);
-        text_info = findViewById(R.id.text_info);
+        textInfo = findViewById(R.id.textInfo);
         recognizer = TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS);    //텍스트 인식에 사용될 모델
 
         // GET IMAGE 버튼
-        btn_get_image = findViewById(R.id.btn_get_image);
-        btn_get_image.setOnClickListener(new View.OnClickListener() {
+        getImage = findViewById(R.id.getImage);
+        getImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Intent.ACTION_PICK);
@@ -61,8 +61,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
         // IMAGE DETECTION 버튼
-        btn_detection_image = findViewById(R.id.btn_detection_image);
-        btn_detection_image.setOnClickListener(new View.OnClickListener() {
+        changeToText = findViewById(R.id.changeToText);
+        changeToText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 TextRecognition(recognizer);
@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
                         Log.e("텍스트 인식", "성공");
                         // Task completed successfully
                         String resultText = visionText.getText();
-                        text_info.setText(resultText);  // 인식한 텍스트를 TextView에 세팅
+                        textInfo.setText(resultText);  // 인식한 텍스트를 TextView에 세팅
                     }
                 })
                 // 이미지 인식에 실패하면 실행되는 리스너
