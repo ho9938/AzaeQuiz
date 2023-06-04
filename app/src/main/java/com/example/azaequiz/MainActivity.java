@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         board = findViewById(R.id.q_answer);
+        board.initBoard(findViewById(R.id.q_pen), findViewById(R.id.q_eraser));
 
         submitBtn = findViewById(R.id.q_submit);
         submitBtn.setOnClickListener(submitAnswer);

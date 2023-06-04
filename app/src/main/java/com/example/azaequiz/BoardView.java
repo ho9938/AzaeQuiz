@@ -29,9 +29,14 @@ public class BoardView extends View {
         paint.setAntiAlias(true);
         paint.setStrokeWidth(20);
         paint.setStyle(Paint.Style.STROKE);
+    }
 
-//        pen = findViewById(R.id.q_pen);
-//        eraser = findViewById(R.id.q_eraser);
+    public void initBoard(ImageButton pen, ImageButton eraser) {
+        this.pen = pen;
+        pen.setOnClickListener(holdPen);
+
+        this.eraser = eraser;
+        eraser.setOnClickListener(holdEraser);
     }
 
     @Override
@@ -74,4 +79,20 @@ public class BoardView extends View {
         Log.d("BoardView", "getBitmap()");
         return bitmap;
     }
+
+    View.OnClickListener holdPen = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            paint.setColor(Color.BLACK);
+            paint.setStrokeWidth(20);
+        }
+    };
+
+    View.OnClickListener holdEraser = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            paint.setColor(Color.WHITE);
+            paint.setStrokeWidth(100);
+        }
+    };
 }
