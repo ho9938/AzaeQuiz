@@ -6,4 +6,130 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <ImageView
+        android:id="@+id/q_test"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintVertical_bias="0"
+
+        />
+
+    <TextView
+        android:id="@+id/q_number"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:text="Q1"
+        android:textSize="30sp"
+        android:padding="0dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintVertical_bias="0.05"
+        android:gravity="center"
+        />
+
+    <TextView
+        android:id="@+id/q_content"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginHorizontal="100dp"
+        android:text="What is it that lives if it is fed, and dies if you give it a drink?"
+        android:textSize="20sp"
+        android:padding="0dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintVertical_bias="0.15"
+        android:gravity="center"
+        />
+
+    <ImageView
+        android:id="@+id/q_board"
+        android:layout_width="500dp"
+        android:layout_height="250dp"
+        android:textSize="20sp"
+        android:padding="0dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf= "@id/q_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.3"
+        app:layout_constraintVertical_bias="0.5"
+        android:src="@drawable/board"
+        android:scaleType="fitXY"
+        />
+
+    <com.example.azaequiz.BoardView
+        android:id="@+id/q_answer"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:textSize="20sp"
+        android:padding="20dp"
+        android:layout_margin="30dp"
+        app:layout_constraintLeft_toLeftOf="@id/q_board"
+        app:layout_constraintRight_toRightOf="@id/q_board"
+        app:layout_constraintTop_toTopOf="@id/q_board"
+        app:layout_constraintBottom_toBottomOf="@id/q_board"
+        />
+
+    <ImageButton
+        android:id="@+id/q_pen"
+        android:layout_width="50dp"
+        android:layout_height="100dp"
+        app:layout_constraintLeft_toRightOf="@id/q_board"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/q_board"
+        app:layout_constraintBottom_toBottomOf="@id/q_board"
+        app:layout_constraintHorizontal_bias="0.3"
+        app:layout_constraintVertical_bias="0.2"
+        android:src="@drawable/marker2"
+        android:scaleType="fitXY"
+        android:padding="0dp"
+        android:background="@android:color/transparent"
+        android:contentDescription="marker"
+    />
+
+    <ImageButton
+        android:id="@+id/q_eraser"
+        android:layout_width="50dp"
+        android:layout_height="100dp"
+        app:layout_constraintLeft_toRightOf="@id/q_board"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/q_board"
+        app:layout_constraintBottom_toBottomOf="@id/q_board"
+        app:layout_constraintHorizontal_bias="0.7"
+        app:layout_constraintVertical_bias="0.2"
+        android:src="@drawable/eraser2"
+        android:scaleType="fitXY"
+        android:padding="0dp"
+        android:background="@android:color/transparent"
+        android:contentDescription="eraser"
+        />
+
+    <ImageButton
+        android:id="@+id/q_submit"
+        android:layout_width="100dp"
+        android:layout_height="70dp"
+        app:layout_constraintLeft_toRightOf="@id/q_board"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/q_board"
+        app:layout_constraintBottom_toBottomOf="@id/q_board"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintVertical_bias="0.8"
+        android:src="@drawable/challenge"
+        android:scaleType="fitXY"
+        android:padding="0dp"
+        android:background="@android:color/transparent"
+        android:contentDescription="challenge"
+        />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
