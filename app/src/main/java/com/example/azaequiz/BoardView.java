@@ -7,14 +7,18 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ImageButton;
 
 public class BoardView extends View {
     private Bitmap bitmap;
     private Canvas canvas;
     private Path path;
     private Paint paint;
+    private ImageButton pen;
+    private ImageButton eraser;
 
     public BoardView(Context context, AttributeSet attrs) { // constructor
         super(context, attrs);
@@ -25,6 +29,9 @@ public class BoardView extends View {
         paint.setAntiAlias(true);
         paint.setStrokeWidth(20);
         paint.setStyle(Paint.Style.STROKE);
+
+//        pen = findViewById(R.id.q_pen);
+//        eraser = findViewById(R.id.q_eraser);
     }
 
     @Override
@@ -32,6 +39,7 @@ public class BoardView extends View {
         super.onSizeChanged(w, h, oldw, oldh);
         bitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
         canvas = new Canvas(bitmap);
+        canvas.drawColor(Color.WHITE);
     }
 
     @Override
@@ -62,5 +70,8 @@ public class BoardView extends View {
         return true;
     }
 
-//    pulbic
+    public Bitmap getBitmap() {
+        Log.d("BoardView", "getBitmap()");
+        return bitmap;
+    }
 }
