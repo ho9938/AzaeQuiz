@@ -31,8 +31,6 @@ import java.io.InputStream;
 
 public class MainActivity extends AppCompatActivity {
     private BoardView board;
-    private ImageButton submitBtn;
-    private ImageView testView;
     private TextScanner textScanner;
 
     @Override
@@ -43,10 +41,8 @@ public class MainActivity extends AppCompatActivity {
         board = findViewById(R.id.q_answer);
         board.initBoard(findViewById(R.id.q_pen), findViewById(R.id.q_eraser));
 
-        submitBtn = findViewById(R.id.q_submit);
+        ImageButton submitBtn = findViewById(R.id.q_submit);
         submitBtn.setOnClickListener(submitAnswer);
-
-        testView = findViewById(R.id.q_test);
         
         textScanner = new TextScanner(recogSuccess, recogFailure);
     }
@@ -60,8 +56,9 @@ public class MainActivity extends AppCompatActivity {
         public void onClick(View v) {
             Log.d("MainActivity", "submitAnswer()");
             Bitmap result = board.getBitmap();
-            testView.setImageBitmap(result);
-    }
+            textScanner.recogBitmap(result);
+        }
+    };
 
     OnSuccessListener<Text> recogSuccess = new OnSuccessListener<Text>() {
         @Override
