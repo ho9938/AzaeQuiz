@@ -12,7 +12,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageButton;
 
-public class BoardView extends View {
+class BoardView extends View {
     private Bitmap bitmap;
     private Canvas canvas;
     private Path path;

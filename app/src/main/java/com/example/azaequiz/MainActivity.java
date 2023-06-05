@@ -30,49 +30,20 @@ import java.io.InputStream;
 
 
 public class MainActivity extends AppCompatActivity {
-    private BoardView board;
-    private TextScanner textScanner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        board = findViewById(R.id.q_answer);
-        board.initBoard(findViewById(R.id.q_pen), findViewById(R.id.q_eraser));
-
-        ImageButton submitBtn = findViewById(R.id.q_submit);
-        submitBtn.setOnClickListener(submitAnswer);
-        
-        textScanner = new TextScanner(recogSuccess, recogFailure);
+        Button normalMode = findViewById(R.id.main_normal);
+        normalMode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, QuizListActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
-    public void notifyText(String text) {
-        Toast.makeText(getApplicationContext(), text, Toast.LENGTH_LONG).show();
-    }
-  
-    View.OnClickListener submitAnswer = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            Log.d("MainActivity", "submitAnswer()");
-            Bitmap result = board.getBitmap();
-            textScanner.recogBitmap(result);
-        }
-    };
-
-    OnSuccessListener<Text> recogSuccess = new OnSuccessListener<Text>() {
-        @Override
-        public void onSuccess(Text text) {
-            Log.d("recogBitmap", "success");
-            String result = text.getText();
-            notifyText(result);
-        }
-    };
-
-    OnFailureListener recogFailure = new OnFailureListener() {
-        @Override
-        public void onFailure(@NonNull Exception e) {
-            Log.e("recogBitmap", "fail");
-        }
-    };
 }
