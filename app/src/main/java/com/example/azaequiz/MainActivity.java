@@ -37,12 +37,16 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Button normalMode = findViewById(R.id.main_normal);
-        normalMode.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, QuizListActivity.class);
-                startActivity(intent);
-            }
+        normalMode.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, QuizListActivity.class);
+            startActivity(intent);
+        });
+
+        Button challengeMode = findViewById(R.id.main_challenge);
+        challengeMode.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, ManagerActivity.class);
+            intent.putExtra("isChallenge", true);
+            startActivity(intent);
         });
     }
 

@@ -15,10 +15,8 @@ import android.widget.ImageButton;
 class BoardView extends View {
     private Bitmap bitmap;
     private Canvas canvas;
-    private Path path;
-    private Paint paint;
-    private ImageButton pen;
-    private ImageButton eraser;
+    private final Path path;
+    private final Paint paint;
 
     public BoardView(Context context, AttributeSet attrs) { // constructor
         super(context, attrs);
@@ -32,10 +30,7 @@ class BoardView extends View {
     }
 
     public void initBoard(ImageButton pen, ImageButton eraser) {
-        this.pen = pen;
         pen.setOnClickListener(holdPen);
-
-        this.eraser = eraser;
         eraser.setOnClickListener(holdEraser);
     }
 

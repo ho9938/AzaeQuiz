@@ -12,8 +12,8 @@
     
     <TextView
         android:id="@+id/qlist_item"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
         android:text="1"
         android:padding="5dp"
         android:textSize="30sp"

@@ -8,7 +8,19 @@ public class QuizBank {
 
     public QuizBank() {
         quizList = new ArrayList<>();
-        quizList.add(new Quiz( "What is it that lives if it is fed, and dies if you give it a drink?", "fire"));
+        quizList.add(new Quiz( "Answer is ONE", "ONE"));
+        quizList.add(new Quiz( "Answer is TWO", "TWO"));
+        quizList.add(new Quiz( "Answer is THREE", "THREE"));
+        quizList.add(new Quiz( "Answer is FOUR", "FOUR"));
+        quizList.add(new Quiz( "Answer is FIVE", "FIVE"));
+        quizList.add(new Quiz( "Answer is SIX", "SIX"));
+        quizList.add(new Quiz( "Answer is SEVEN", "SEVEN"));
+        quizList.add(new Quiz( "Answer is EIGHT", "EIGHT"));
+        quizList.add(new Quiz( "Answer is NINE", "NINE"));
+        quizList.add(new Quiz( "Answer is TEN", "TEN"));
+        quizList.add(new Quiz( "Answer is ELEVEN", "ELEVEN"));
+        quizList.add(new Quiz( "Answer is TWELVE", "TWELVE"));
+
         quizSize = quizList.size();
     }
 

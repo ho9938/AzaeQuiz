@@ -28,7 +28,7 @@ public class QuizListActivity extends AppCompatActivity {
         this.quizBank = new QuizBank();
 
         RecyclerView selection = findViewById(R.id.qlist_selection);
-        selection.setLayoutManager(new GridLayoutManager(this, 10));
+        selection.setLayoutManager(new GridLayoutManager(this, 8));
         selection.setAdapter(new QuizListAdapter(quizBank));
     }
 }
@@ -54,17 +54,13 @@ class QuizListAdapter extends RecyclerView.Adapter<QuizHolder> {
     @Override
     public void onBindViewHolder(@NonNull QuizHolder holder, int position) {
         holder.setText(quizBank.getName(position));
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int index = holder.getAdapterPosition();
+        holder.itemView.setOnClickListener(v -> {
+            int index = holder.getAdapterPosition();
 
-                Intent intent = new Intent(v.getContext(), BoardActivity.class);
-                intent.putExtra("question_name", quizBank.getName(index));
-                intent.putExtra("question_content", quizBank.getContent(index));
-                intent.putExtra("question_answer", quizBank.getAnswer(index));
-                v.getContext().startActivity(intent);
-            }
+            Intent intent = new Intent(v.getContext(), ManagerActivity.class);
+            intent.putExtra("isChallenge", false);
+            intent.putExtra("index", index);
+            v.getContext().startActivity(intent);
         });
     }
 
@@ -75,7 +71,7 @@ class QuizListAdapter extends RecyclerView.Adapter<QuizHolder> {
 }
 
 class QuizHolder extends RecyclerView.ViewHolder {
-    private TextView nameView;
+    private final TextView nameView;
 
     public QuizHolder(View itemView) {
         super(itemView);

@@ -3,6 +3,7 @@ package com.example.azaequiz;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
@@ -16,6 +17,8 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.mlkit.vision.text.Text;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
 
@@ -23,6 +26,8 @@ public class BoardActivity extends AppCompatActivity {
     private BoardView board;
     private TextScanner textScanner;
     private String question_answer;
+    private CheckAnswerDialog checkAnswerDialog;
+    private boolean is_challenge;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,9 +43,12 @@ public class BoardActivity extends AppCompatActivity {
         textScanner = new TextScanner(recogSuccess, recogFailure);
 
         Intent intent = getIntent();
+        is_challenge = intent.getBooleanExtra("is_challenge", false);
         String question_name = intent.getStringExtra("question_name");
         String question_content = intent.getStringExtra("question_content");
-        this.question_answer = intent.getStringExtra("question_answer");
+        question_answer = intent.getStringExtra("question_answer");
+
+        checkAnswerDialog = new CheckAnswerDialog(this, goback, retry, gonext);
 
         TextView board_number = findViewById(R.id.board_qname);
         board_number.setText(question_name);
@@ -68,6 +76,19 @@ public class BoardActivity extends AppCompatActivity {
             Log.d("recogBitmap", "success");
             String result = text.getText();
             notifyText(result);
+
+            startSubmitActivity();
+
+            if (is_challenge) {
+                if (checkAnswerDialog.isCorrect(question_answer, result)) {
+                    returnWithCode(2001);
+                } else {
+                    returnWithCode(2000);
+                }
+            } else {
+                checkAnswerDialog.setContent(question_answer, result);
+                new Handler().postDelayed(() -> checkAnswerDialog.show(), 3000);
+            }
         }
     };
 
@@ -76,5 +97,32 @@ public class BoardActivity extends AppCompatActivity {
         public void onFailure(@NonNull Exception e) {
             Log.e("recogBitmap", "fail");
         }
+    };
+
+    private void startSubmitActivity() {
+        Intent intent = new Intent(BoardActivity.this, SubmitActivity.class);
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        board.getBitmap().compress(Bitmap.CompressFormat.JPEG, 100, stream);
+        byte[] byteArray = stream.toByteArray();
+        intent.putExtra("image", byteArray);
+        startActivity(intent);
+    }
+
+    private void returnWithCode(int code) {
+        Intent intent = new Intent(BoardActivity.this, ManagerActivity.class);
+        setResult(code, intent);
+        finish();
+    }
+
+    View.OnClickListener goback = v -> {
+        returnWithCode(-1);
+    };
+
+    View.OnClickListener retry = v -> {
+        returnWithCode(1000);
+    };
+
+    View.OnClickListener gonext = v -> {
+        returnWithCode(1001);
     };
 }
