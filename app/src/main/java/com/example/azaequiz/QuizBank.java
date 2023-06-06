@@ -1,27 +1,26 @@
 package com.example.azaequiz;
 
+import android.content.res.AssetManager;
+import android.util.Log;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 public class QuizBank {
+    private AssetManager assetManager;
     private ArrayList<Quiz> quizList;
     private int quizSize;
 
-    public QuizBank() {
-        quizList = new ArrayList<>();
-        quizList.add(new Quiz( "Answer is ONE", "ONE"));
-        quizList.add(new Quiz( "Answer is TWO", "TWO"));
-        quizList.add(new Quiz( "Answer is THREE", "THREE"));
-        quizList.add(new Quiz( "Answer is FOUR", "FOUR"));
-        quizList.add(new Quiz( "Answer is FIVE", "FIVE"));
-        quizList.add(new Quiz( "Answer is SIX", "SIX"));
-        quizList.add(new Quiz( "Answer is SEVEN", "SEVEN"));
-        quizList.add(new Quiz( "Answer is EIGHT", "EIGHT"));
-        quizList.add(new Quiz( "Answer is NINE", "NINE"));
-        quizList.add(new Quiz( "Answer is TEN", "TEN"));
-        quizList.add(new Quiz( "Answer is ELEVEN", "ELEVEN"));
-        quizList.add(new Quiz( "Answer is TWELVE", "TWELVE"));
-
-        quizSize = quizList.size();
+    public QuizBank(AssetManager assetManager) {
+        this.assetManager = assetManager;
+        constructBank();
     }
 
     public String getName(int index) {
@@ -42,7 +41,55 @@ public class QuizBank {
     public int getSize() {
         return this.quizSize;
     }
+
+    private void constructBank() {
+        Log.d("QuizBank", "json parsing start");
+
+        StringBuilder json = new StringBuilder();
+        InputStream inputStream = null;
+
+        try {
+            inputStream = assetManager.open("quizzes.json");
+            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+
+            String line = "";
+            while ((line= reader.readLine()) != null) {
+                json.append(line);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (inputStream != null) {
+                try {
+                    inputStream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        quizList = new ArrayList<>();
+        try {
+            JSONObject jsonObject = new JSONObject(json.toString());
+            JSONArray quizArray = jsonObject.getJSONArray("quizzes");
+
+            for (int i = 0; i < quizArray.length(); i += 1) {
+                JSONObject curObject = quizArray.getJSONObject(i);
+                Quiz curQuiz = new Quiz(curObject.getString("content"), curObject.getString("answer"));
+
+                quizList.add(curQuiz);
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        quizSize = quizList.size();
+
+        Log.d("QuizBank", "json parsing complete");
+    }
 }
+
 class Quiz {
     final private String question;
     final private String answer;

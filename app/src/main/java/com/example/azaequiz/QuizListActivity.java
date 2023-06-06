@@ -25,7 +25,7 @@ public class QuizListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quizlist);
 
-        this.quizBank = new QuizBank();
+        this.quizBank = new QuizBank(getAssets());
 
         RecyclerView selection = findViewById(R.id.qlist_selection);
         selection.setLayoutManager(new GridLayoutManager(this, 8));

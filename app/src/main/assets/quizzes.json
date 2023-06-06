@@ -1,0 +1,52 @@
+{
+  "quizzes": [
+    {
+      "content": "Answer is ONE",
+      "answer": "ONE"
+    },
+    {
+      "content": "Answer is TWO",
+      "answer": "TWO"
+    },
+    {
+      "content": "Answer is THREE",
+      "answer": "THREE"
+    },
+    {
+      "content": "Answer is FOUR",
+      "answer": "FOUR"
+    },
+    {
+      "content": "Answer is FIVE",
+      "answer": "FIVE"
+    },
+    {
+      "content": "Answer is SIX",
+      "answer": "SIX"
+    },
+    {
+      "content": "Answer is SEVEN",
+      "answer": "SEVEN"
+    },
+    {
+      "content": "Answer is EIGHT",
+      "answer": "EIGHT"
+    },
+    {
+      "content": "Answer is NINE",
+      "answer": "NINE"
+    },
+    {
+      "content": "Answer is TEN",
+      "answer": "TEN"
+    },
+    {
+      "content": "Answer is ELEVEN",
+      "answer": "ELEVEN"
+    },
+    {
+      "content": "Answer is TWELVE",
+      "answer": "TWELVE"
+    }
+  ]
+}

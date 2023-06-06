@@ -29,7 +29,7 @@ public class ManagerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_board);
 
-        quizBank = new QuizBank();
+        quizBank = new QuizBank(getAssets());
         boardLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), boardResultHandler);
 
         Intent intent = getIntent();
