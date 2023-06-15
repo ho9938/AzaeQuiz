@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 public class CheckAnswerDialog extends Dialog {
     final private TextView tv1, tv2, tv3;
     final private TextView info;
+    final double criterion = 0.7;
 
     public CheckAnswerDialog(@NonNull Context context,
                              View.OnClickListener l1,
@@ -55,8 +56,13 @@ public class CheckAnswerDialog extends Dialog {
     }
 
     public void setContent(String correct_answer, String given_answer, int rem_problems) {
-        if (isCorrect(correct_answer, given_answer)) {
+        double ratio = correctness(correct_answer, given_answer);
+
+        if (ratio == 1) {
             tv1.setText("CORRECT!");
+            info.setText(rem_problems + " Problems to WIN!");
+        } else if (ratio >= criterion) {
+            tv1.setText("MAYBE CORRECT?");
             info.setText(rem_problems + " Problems to WIN!");
         } else {
             tv1.setText("INCORRECT!");
@@ -67,7 +73,24 @@ public class CheckAnswerDialog extends Dialog {
         tv3.setText("Your Answer: " + given_answer);
     }
 
-    public Boolean isCorrect(String correct_answer, String given_answer) {
-        return correct_answer.equalsIgnoreCase(given_answer);
+    public double correctness (String correct_answer, String given_answer) {
+        int max_score = correct_answer.length();
+        int cur_score = 0;
+
+        if (correct_answer.equalsIgnoreCase(given_answer)) {
+            return 1.0;
+        }
+
+        // else
+        for (int i=0; i < given_answer.length(); i++) {
+            if (correct_answer.toLowerCase().indexOf(given_answer.toLowerCase().charAt(i)) != -1) {
+                cur_score += 1;
+            }
+        }
+        return (double) cur_score / max_score;
+    }
+
+    public boolean isCorrect(String correct_answer, String given_answer) {
+        return correctness(correct_answer, given_answer) >= criterion;
     }
 }

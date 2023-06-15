@@ -92,10 +92,6 @@ public class BoardActivity extends AppCompatActivity {
         soundManager.release();
     }
 
-    public void notifyText(String text) {
-        Toast.makeText(getApplicationContext(), text, Toast.LENGTH_LONG).show();
-    }
-
     private void speakText(String text) {
         tts.speak(text, TextToSpeech.QUEUE_FLUSH, null, null);
     }
