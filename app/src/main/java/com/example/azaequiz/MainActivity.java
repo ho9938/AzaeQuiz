@@ -42,12 +42,9 @@ public class MainActivity extends AppCompatActivity {
         VideoView vv = findViewById(R.id.main_background);
         Uri uri = Uri.parse("android.resource://" + getPackageName() + "/raw/opening");
         vv.setVideoURI(uri);
-        vv.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-            @Override
-            public void onPrepared(MediaPlayer mp) {
-                mp.start();
-                mp.setLooping(true);
-            }
+        vv.setOnPreparedListener(mp -> {
+            mp.start();
+            mp.setLooping(true);
         });
 
         Button normalMode = findViewById(R.id.main_normal);

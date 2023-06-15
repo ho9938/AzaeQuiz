@@ -35,19 +35,11 @@ public class ResultActivity extends AppCompatActivity {
             tv.setText("YOU LOST THE GOLDEN BELL");
         }
 
-        vv.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-            @Override
-            public void onPrepared(MediaPlayer mp) {
-                mp.start();
-                mp.setLooping(true);
-            }
+        vv.setOnPreparedListener(mp -> {
+            mp.start();
+            mp.setLooping(true);
         });
 
-        vv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        vv.setOnClickListener(v -> finish());
     }
 }

@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.media.SoundPool;
 import android.os.Bundle;
 import android.os.Handler;
+import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
@@ -21,6 +22,7 @@ import com.google.mlkit.vision.text.Text;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
+import java.util.Locale;
 
 
 public class BoardActivity extends AppCompatActivity {
@@ -31,6 +33,7 @@ public class BoardActivity extends AppCompatActivity {
     private CheckAnswerDialog checkAnswerDialog;
     private SoundManager soundManager;
     int remain_question;
+    private TextToSpeech tts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +69,20 @@ public class BoardActivity extends AppCompatActivity {
         soundManager.addSound(2, R.raw.success);
         soundManager.addSound(3, R.raw.failure);
         new Handler().postDelayed(() -> soundManager.playSound(1), 1000);
+
+        tts = new TextToSpeech(this, status -> {
+            if (status == TextToSpeech.SUCCESS) {
+                int result = tts.setLanguage(Locale.ENGLISH);
+                if (result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED) {
+                    Log.e("TTS", "Language not supported");
+                }
+                new Handler().postDelayed(() -> {
+                    speakText(question_content);
+                }, 3000);
+            } else {
+                Log.e("TTS", "Initialization failed");
+            }
+        });
     }
 
     @Override
@@ -77,6 +94,10 @@ public class BoardActivity extends AppCompatActivity {
 
     public void notifyText(String text) {
         Toast.makeText(getApplicationContext(), text, Toast.LENGTH_LONG).show();
+    }
+
+    private void speakText(String text) {
+        tts.speak(text, TextToSpeech.QUEUE_FLUSH, null, null);
     }
   
     View.OnClickListener submitAnswer = new View.OnClickListener() {
