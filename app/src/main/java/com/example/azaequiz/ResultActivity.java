@@ -3,10 +3,14 @@ package com.example.azaequiz;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.VideoView;
 
 public class ResultActivity extends AppCompatActivity {
 
@@ -15,22 +19,35 @@ public class ResultActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
 
-        ImageView iv = findViewById(R.id.result_background);
+        VideoView vv = findViewById(R.id.result_background);
         TextView tv = findViewById(R.id.result_content);
 
         Intent intent = getIntent();
         boolean success = intent.getBooleanExtra("success", false);
 
         if (success) {
-//            iv.setBackgroundResource(R.drawable.success);
-            iv.setImageResource(R.drawable.success);
-            tv.setText("YOU WON THE GOLDEN BELL!!!");
+            Uri uri = Uri.parse("android.resource://" + getPackageName() + "/raw/success_ch");
+            vv.setVideoURI(uri);
+            tv.setText("YOU WON THE GOLDEN BELL");
         } else {
-//            iv.setBackgroundResource(R.drawable.failure);
-            iv.setImageResource(R.drawable.failure);
-            tv.setText("YOU LOST THE GOLDEN BELL...");
+            Uri uri = Uri.parse("android.resource://" + getPackageName() + "/raw/failure_ch");
+            vv.setVideoURI(uri);
+            tv.setText("YOU LOST THE GOLDEN BELL");
         }
 
-        new Handler().postDelayed(this::finish, 5000);
+        vv.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+            @Override
+            public void onPrepared(MediaPlayer mp) {
+                mp.start();
+                mp.setLooping(true);
+            }
+        });
+
+        vv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 }

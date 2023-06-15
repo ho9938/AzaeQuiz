@@ -50,8 +50,6 @@ public class ManagerActivity extends AppCompatActivity {
 
         soundManager = new SoundManager(this, new SoundPool.Builder().build());
         soundManager.addSound(0, R.raw.submit);
-        soundManager.addSound(1, R.raw.success_ch);
-        soundManager.addSound(2, R.raw.failure_ch);
     }
 
     @Override
@@ -91,11 +89,6 @@ public class ManagerActivity extends AppCompatActivity {
 //        boolean success = true;
         intent.putExtra("success", success);
 
-        if (success) {
-            soundManager.playSound(1);
-        } else {
-            soundManager.playSound(2);
-        }
         startActivity(intent);
         new Handler().postDelayed(this::finish, 5000);
     }

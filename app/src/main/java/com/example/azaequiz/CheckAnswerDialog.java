@@ -57,7 +57,7 @@ public class CheckAnswerDialog extends Dialog {
     public void setContent(String correct_answer, String given_answer, int rem_problems) {
         if (isCorrect(correct_answer, given_answer)) {
             tv1.setText("CORRECT!");
-            info.setText(rem_problems + "Problems to WIN!");
+            info.setText(rem_problems + " Problems to WIN!");
         } else {
             tv1.setText("INCORRECT!");
             info.setText("You are OUT...");
