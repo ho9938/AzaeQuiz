@@ -5,6 +5,12 @@
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
         <item name="android:windowFullscreen">true</item>
         <item name="android:windowAnimationStyle">@null</item>
+
+        <item name="android:textViewStyle">@style/ubuntuTextViewFontStyle</item>
+        <item name="android:buttonStyle">@style/ubuntuButtonFontStyle</item>
+        <item name="android:editTextStyle">@style/ubuntuEditTextFontStyle</item>
+        <item name="android:radioButtonStyle">@style/ubuntuRadioButtonFontStyle</item>
+        <item name="android:checkboxStyle">@style/ubuntuCheckboxFontStyle</item>
     </style>
 
     <style name="Theme.AzaeQuiz" parent="Base.Theme.AzaeQuiz" />
