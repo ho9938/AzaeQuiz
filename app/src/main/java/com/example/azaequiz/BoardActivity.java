@@ -2,6 +2,7 @@ package com.example.azaequiz;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -20,7 +21,10 @@ import com.google.mlkit.vision.text.Text;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
+import java.util.Locale;
 
+import android.speech.tts.TextToSpeech;
+import static android.speech.tts.TextToSpeech.ERROR;
 
 public class BoardActivity extends AppCompatActivity {
     private BoardView board;
@@ -28,6 +32,7 @@ public class BoardActivity extends AppCompatActivity {
     private String question_answer;
     private CheckAnswerDialog checkAnswerDialog;
     private boolean is_challenge;
+    private TextToSpeech tts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +60,23 @@ public class BoardActivity extends AppCompatActivity {
 
         TextView board_content = findViewById(R.id.board_qcontent);
         board_content.setText(question_content);
+
+        tts = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int status) {
+                if (status == TextToSpeech.SUCCESS) {
+                    int result = tts.setLanguage(Locale.getDefault());
+                    if (result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED) {
+                        Log.e("TTS", "Language not supported");
+                    }
+                    speakText(question_content);
+                } else {
+                    Log.e("TTS", "Initialization failed");
+                }
+            }
+        });
+
+
     }
 
     public void notifyText(String text) {
@@ -91,6 +113,14 @@ public class BoardActivity extends AppCompatActivity {
             }
         }
     };
+
+    private void speakText(String text) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            tts.speak(text, TextToSpeech.QUEUE_FLUSH, null, null);
+        } else {
+            tts.speak(text, TextToSpeech.QUEUE_FLUSH, null);
+        }
+    }
 
     OnFailureListener recogFailure = new OnFailureListener() {
         @Override
