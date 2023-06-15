@@ -7,6 +7,7 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.media.SoundPool;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -22,7 +23,7 @@ public class ManagerActivity extends AppCompatActivity {
     private int challengeLevel=3;
     private ArrayList<Integer> shuffledList;
     private int curTurn;
-    private int curScore;
+    private SoundManager soundManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +47,18 @@ public class ManagerActivity extends AppCompatActivity {
             curTurn = 0;
             launchBoard(shuffledList.get(curTurn));
         }
+
+        soundManager = new SoundManager(this, new SoundPool.Builder().build());
+        soundManager.addSound(0, R.raw.submit);
+        soundManager.addSound(1, R.raw.success_ch);
+        soundManager.addSound(2, R.raw.failure_ch);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        soundManager.release();
     }
 
     private void launchBoard(int index) {
@@ -54,6 +67,7 @@ public class ManagerActivity extends AppCompatActivity {
         intent.putExtra("question_name", quizBank.getName(index));
         intent.putExtra("question_content", quizBank.getContent(index));
         intent.putExtra("question_answer", quizBank.getAnswer(index));
+        intent.putExtra("remain_question", challengeLevel - curTurn - 1);
 
         boardLauncher.launch(intent);
     }
@@ -73,10 +87,17 @@ public class ManagerActivity extends AppCompatActivity {
 
     private void showResult() {
         Intent intent = new Intent(ManagerActivity.this, ResultActivity.class);
-        intent.putExtra("success", curScore >= challengeLevel);
-        intent.putExtra("content", "Your Score: " + curScore + "/" + challengeLevel);
+        boolean success = curTurn >= challengeLevel;
+//        boolean success = true;
+        intent.putExtra("success", success);
 
+        if (success) {
+            soundManager.playSound(1);
+        } else {
+            soundManager.playSound(2);
+        }
         startActivity(intent);
+        new Handler().postDelayed(this::finish, 5000);
     }
 
     ActivityResultCallback<ActivityResult> boardResultHandler = result -> {
@@ -89,15 +110,15 @@ public class ManagerActivity extends AppCompatActivity {
             launchBoard(curIndex);
         } else if (2000 <= resultCode && resultCode < 3000) { // challenge mode
             int decoded = resultCode - 2000;
-            if (decoded == 1) {
-                curScore += 1;
-            }
-            curTurn += 1;
-            if (curTurn < challengeLevel) {
-                launchBoard(shuffledList.get(curTurn));
-            } else {
+            if (decoded == 0) { // incorrect answer
                 showResult();
-                finish();
+            } else {
+                curTurn += 1;
+                if (curTurn < challengeLevel) {
+                    launchBoard(shuffledList.get(curTurn));
+                } else {
+                    showResult();
+                }
             }
         } else {
             finish();

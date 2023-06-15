@@ -2,6 +2,7 @@ package com.example.azaequiz;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.media.SoundPool;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -25,9 +26,11 @@ import java.util.ArrayList;
 public class BoardActivity extends AppCompatActivity {
     private BoardView board;
     private TextScanner textScanner;
+    private boolean is_challenge;
     private String question_answer;
     private CheckAnswerDialog checkAnswerDialog;
-    private boolean is_challenge;
+    private SoundManager soundManager;
+    int remain_question;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,14 +50,29 @@ public class BoardActivity extends AppCompatActivity {
         String question_name = intent.getStringExtra("question_name");
         String question_content = intent.getStringExtra("question_content");
         question_answer = intent.getStringExtra("question_answer");
+        remain_question = intent.getIntExtra("remain_question", -1);
 
-        checkAnswerDialog = new CheckAnswerDialog(this, goback, retry, gonext);
+        checkAnswerDialog = new CheckAnswerDialog(this, goback, retry, gonext, is_challenge);
 
         TextView board_number = findViewById(R.id.board_qname);
         board_number.setText(question_name);
 
         TextView board_content = findViewById(R.id.board_qcontent);
         board_content.setText(question_content);
+
+        soundManager = new SoundManager(this, new SoundPool.Builder().build());
+        soundManager.addSound(0, R.raw.submit);
+        soundManager.addSound(1, R.raw.question);
+        soundManager.addSound(2, R.raw.success);
+        soundManager.addSound(3, R.raw.failure);
+        new Handler().postDelayed(() -> soundManager.playSound(1), 1000);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        soundManager.release();
     }
 
     public void notifyText(String text) {
@@ -74,20 +92,29 @@ public class BoardActivity extends AppCompatActivity {
         @Override
         public void onSuccess(Text text) {
             Log.d("recogBitmap", "success");
-            String result = text.getText();
-            notifyText(result);
+            String result = text.getText().trim().toUpperCase();
+            boolean is_correct = checkAnswerDialog.isCorrect(question_answer, result);
+//            notifyText(result);
 
             startSubmitActivity();
 
-            if (is_challenge) {
-                if (checkAnswerDialog.isCorrect(question_answer, result)) {
-                    returnWithCode(2001);
+            checkAnswerDialog.setContent(question_answer, result, remain_question);
+            new Handler().postDelayed(() -> {
+                checkAnswerDialog.show();
+                if (is_correct) {
+                    soundManager.playSound(2);
                 } else {
-                    returnWithCode(2000);
-                }
-            } else {
-                checkAnswerDialog.setContent(question_answer, result);
-                new Handler().postDelayed(() -> checkAnswerDialog.show(), 3000);
+                    soundManager.playSound(3);
+                }}, 3000);
+
+            if (is_challenge) {
+                new Handler().postDelayed(() -> {
+                    checkAnswerDialog.show();
+                    if (is_correct) {
+                        returnWithCode(2001);
+                    } else {
+                        returnWithCode(2000);
+                    }}, 6000);
             }
         }
     };
@@ -105,7 +132,9 @@ public class BoardActivity extends AppCompatActivity {
         board.getBitmap().compress(Bitmap.CompressFormat.JPEG, 100, stream);
         byte[] byteArray = stream.toByteArray();
         intent.putExtra("image", byteArray);
+
         startActivity(intent);
+        soundManager.playSound(0);
     }
 
     private void returnWithCode(int code) {

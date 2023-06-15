@@ -20,16 +20,17 @@ public class ResultActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         boolean success = intent.getBooleanExtra("success", false);
-        String content = intent.getStringExtra("content");
 
         if (success) {
-            iv.setBackgroundResource(R.drawable.success);
+//            iv.setBackgroundResource(R.drawable.success);
+            iv.setImageResource(R.drawable.success);
+            tv.setText("YOU WON THE GOLDEN BELL!!!");
         } else {
-            iv.setBackgroundResource(R.drawable.failure);
+//            iv.setBackgroundResource(R.drawable.failure);
+            iv.setImageResource(R.drawable.failure);
+            tv.setText("YOU LOST THE GOLDEN BELL...");
         }
 
-        tv.setText(content);
-
-        new Handler().postDelayed(this::finish, 3000);
+        new Handler().postDelayed(this::finish, 5000);
     }
 }

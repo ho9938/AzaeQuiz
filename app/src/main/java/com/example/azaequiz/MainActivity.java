@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.SoundPool;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -30,11 +31,16 @@ import java.io.InputStream;
 
 
 public class MainActivity extends AppCompatActivity {
+    private SoundManager soundManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        soundManager = new SoundManager(this, new SoundPool.Builder().build());
+//        soundManager.addSound(0, R.raw.opening);
+//        soundManager.playSound(0);
 
         Button normalMode = findViewById(R.id.main_normal);
         normalMode.setOnClickListener(v -> {
@@ -50,4 +56,10 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        soundManager.release();
+    }
 }

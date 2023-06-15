@@ -17,9 +17,9 @@
 
         <TextView
             android:id="@+id/check_tv1"
-            android:layout_width="300dp"
-            android:layout_height="50dp"
-            android:textSize="30sp"
+            android:layout_width="500dp"
+            android:layout_height="80dp"
+            android:textSize="50sp"
             android:text="CORRECT!"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
@@ -35,7 +35,7 @@
             android:text="Correct Answer: fire"
             android:layout_below="@id/check_tv1"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="20dp"
             android:gravity="center"
             />
 
@@ -44,7 +44,7 @@
             android:layout_width="500dp"
             android:layout_height="30dp"
             android:textSize="20sp"
-            android:text="Correct Answer: fire"
+            android:text="Your Answer: fire"
             android:layout_below="@id/check_tv2"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="0dp"
@@ -61,6 +61,7 @@
             android:text="GO BACK"
             android:gravity="center"
             android:padding="10dp"
+            android:visibility="invisible"
             />
 
         <Button
@@ -73,6 +74,7 @@
             android:text="RETRY"
             android:gravity="center"
             android:padding="10dp"
+            android:visibility="invisible"
             />
 
         <Button
@@ -85,6 +87,21 @@
             android:text="GO NEXT"
             android:gravity="center"
             android:padding="10dp"
+            android:visibility="invisible"
+            />
+
+        <TextView
+            android:id="@+id/check_info"
+            android:layout_width="700dp"
+            android:layout_height="70dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="30dp"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="5 Problems to WIN!"
+            android:textSize="30sp"
+            android:visibility="visible"
             />
 
     </RelativeLayout>

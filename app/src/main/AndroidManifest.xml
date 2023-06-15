@@ -12,6 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AzaeQuiz"
         tools:targetApi="31">
+        <service android:name=".SoundManager"></service>
         <activity
             android:name=".ResultActivity"
             android:exported="false"
