@@ -14,7 +14,7 @@ import androidx.annotation.NonNull;
 public class CheckAnswerDialog extends Dialog {
     final private TextView tv1, tv2, tv3;
     final private TextView info;
-    final double criterion = 0.5;
+    final double criterion = 0.7;
 
     public CheckAnswerDialog(@NonNull Context context,
                              View.OnClickListener l1,
