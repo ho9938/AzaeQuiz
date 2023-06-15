@@ -8,24 +8,19 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-
 public class QuizListActivity extends AppCompatActivity {
-    private QuizBank quizBank;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quizlist);
 
-        this.quizBank = new QuizBank(getAssets());
+        QuizBank quizBank = new QuizBank(getAssets());
 
         RecyclerView selection = findViewById(R.id.qlist_selection);
         selection.setLayoutManager(new GridLayoutManager(this, 8));

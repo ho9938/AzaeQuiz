@@ -14,7 +14,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 public class QuizBank {
-    private AssetManager assetManager;
+    private final AssetManager assetManager;
     private ArrayList<Quiz> quizList;
     private int quizSize;
 
@@ -52,7 +52,7 @@ public class QuizBank {
             inputStream = assetManager.open("quizzes.json");
             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
 
-            String line = "";
+            String line;
             while ((line= reader.readLine()) != null) {
                 json.append(line);
             }

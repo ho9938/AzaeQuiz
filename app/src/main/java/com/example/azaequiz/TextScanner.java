@@ -1,7 +1,6 @@
 package com.example.azaequiz;
 
 import android.graphics.Bitmap;
-import android.util.Log;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;

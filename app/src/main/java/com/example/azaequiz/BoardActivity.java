@@ -10,18 +10,14 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.mlkit.vision.text.Text;
 
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.util.ArrayList;
 import java.util.Locale;
 
 
@@ -76,9 +72,7 @@ public class BoardActivity extends AppCompatActivity {
                 if (result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED) {
                     Log.e("TTS", "Language not supported");
                 }
-                new Handler().postDelayed(() -> {
-                    speakText(question_content);
-                }, 3000);
+                new Handler().postDelayed(() -> speakText(question_content), 3000);
             } else {
                 Log.e("TTS", "Initialization failed");
             }
@@ -135,12 +129,7 @@ public class BoardActivity extends AppCompatActivity {
         }
     };
 
-    OnFailureListener recogFailure = new OnFailureListener() {
-        @Override
-        public void onFailure(@NonNull Exception e) {
-            Log.e("recogBitmap", "fail");
-        }
-    };
+    OnFailureListener recogFailure = e -> Log.e("recogBitmap", "fail");
 
     private void startSubmitActivity() {
         Intent intent = new Intent(BoardActivity.this, SubmitActivity.class);
@@ -159,15 +148,9 @@ public class BoardActivity extends AppCompatActivity {
         finish();
     }
 
-    View.OnClickListener goback = v -> {
-        returnWithCode(-1);
-    };
+    View.OnClickListener goback = v -> returnWithCode(-1);
 
-    View.OnClickListener retry = v -> {
-        returnWithCode(1000);
-    };
+    View.OnClickListener retry = v -> returnWithCode(1000);
 
-    View.OnClickListener gonext = v -> {
-        returnWithCode(1001);
-    };
+    View.OnClickListener gonext = v -> returnWithCode(1001);
 }

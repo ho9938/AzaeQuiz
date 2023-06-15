@@ -54,7 +54,7 @@ class BoardView extends View {
         int y = (int)event.getY();
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
-                path.reset();;
+                path.reset();
                 path.moveTo(x, y);
                 break;
             case MotionEvent.ACTION_MOVE:

@@ -32,6 +32,7 @@ public class OutLineTextView extends androidx.appcompat.widget.AppCompatTextView
         stroke = a.getBoolean(R.styleable.OutLineTextView_textStroke, false);
         strokeWidth = a.getFloat(R.styleable.OutLineTextView_textStrokeWidth, 0.0f);
         strokeColor = a.getColor(R.styleable.OutLineTextView_textStrokeColor, Color.WHITE);
+        a.recycle();
     }
 
     @Override
