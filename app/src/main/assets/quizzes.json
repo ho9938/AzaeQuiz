@@ -1,52 +1,156 @@
 {
   "quizzes": [
     {
-      "content": "Answer is ONE",
-      "answer": "ONE"
+      "content": "What Gets Wet While Drying?",
+      "answer": "Towel"
     },
     {
-      "content": "Answer is TWO",
-      "answer": "TWO"
+      "content": "What Goes Up But Never Ever Comes Down?",
+      "answer": "Age"
     },
     {
-      "content": "Answer is THREE",
-      "answer": "THREE"
+      "content": "I Am Full Of Holes, But I Can Hold Water. Who Am I?",
+      "answer": "Sponge"
     },
     {
-      "content": "Answer is FOUR",
-      "answer": "FOUR"
+      "content": "What Has Many Keys But Can’t Open A Door?",
+      "answer": "Piano"
     },
     {
-      "content": "Answer is FIVE",
-      "answer": "FIVE"
+      "content": "What Type Of Dress Can Never Be Worn?",
+      "answer": "Address"
     },
     {
-      "content": "Answer is SIX",
-      "answer": "SIX"
+      "content": "What Has One Eye But Cannot See?",
+      "answer": "needle"
     },
     {
-      "content": "Answer is SEVEN",
-      "answer": "SEVEN"
+      "content": "If I Have It, I Don’t Share It. If I Share It, I Don’t Have It. What Is It?",
+      "answer": "secret"
     },
     {
-      "content": "Answer is EIGHT",
-      "answer": "EIGHT"
+      "content": "I’m Where Yesterday Follows Today, And Tomorrow Is In The Middle. What Am I?",
+      "answer": "Dictionary"
     },
     {
-      "content": "Answer is NINE",
-      "answer": "NINE"
+      "content": "What Is A Seven Letter Word That Contains Thousands Of Letters?",
+      "answer": "Mailbox"
     },
     {
-      "content": "Answer is TEN",
-      "answer": "TEN"
+      "content": "What Is It That Lives If It Is Fed And Dies If You Give It A Drink?",
+      "answer": "fire"
     },
     {
-      "content": "Answer is ELEVEN",
-      "answer": "ELEVEN"
+      "content": "What Word Is Spelled Incorrectly In Every Single Dictionary?",
+      "answer": "Incorrectly"
     },
     {
-      "content": "Answer is TWELVE",
-      "answer": "TWELVE"
+      "content": "What Can One Catch That Is Not Thrown?",
+      "answer": "cold"
+    },
+    {
+      "content": "What Starts With “E” And Ends With “E” But Only Has One Letter In It?",
+      "answer": "envelope"
+    },
+    {
+      "content": "I Am An Odd Number. Take Away One Letter And I Become Even. What Number Am I?",
+      "answer": "Seven"
+    },
+    {
+      "content": "What Goes Up But Never Ever Comes Down?",
+      "answer": "Age"
+    },
+    {
+      "content": "What Belongs To You But Gets Used By Everyone Else More Than You?",
+      "answer": "name"
+    },
+    {
+      "content": "People Buy Me To Eat, But Never Eat Me. What Am I?",
+      "answer": "plate"
+    },
+    {
+      "content": "What Always Goes To Bed With Its Shoes On?",
+      "answer": "horse"
+    },
+    {
+      "content": "I Have Teeth But Can’t Eat. What Am I?",
+      "answer": "comb"
+    },
+    {
+      "content": "What Bird Can Lift The Most Weight?",
+      "answer": "crane"
+    },
+    {
+      "content": "What Goes Up As Soon As The Rain Comes Down?",
+      "answer": "umbrella"
+    },
+    {
+      "content": "The More You Take, The More You Leave Behind. What Am I?",
+      "answer": "footprints"
+    },
+    {
+      "content": "Forwards I’m Heavy, But Backward, I’m Not. What Am I?",
+      "answer": "ton"
+    },
+    {
+      "content": "What Tastes Better Than It Smells?",
+      "answer": "tongue"
+    },
+    {
+      "content": "What Runs Around The Yard Without Moving?",
+      "answer": "fence"
+    },
+    {
+      "content": "Which Bow Can’t Be Tied?",
+      "answer": "Rainbow"
+    },
+    {
+      "content": "I Am Nothing But Holes Tied To Holes, Yet I Am Strong As Iron.",
+      "answer": "chain"
+    },
+    {
+      "content": "Which Word Becomes Shorter When You Add Two Letters To It?",
+      "answer": "Short"
+    },
+    {
+      "content": "Many Have Heard Me, But Nobody Has Seen Me, And I Will Not Speak Back Until Spoken To. What Am I?",
+      "answer": "Echo"
+    },
+    {
+      "content": "I Have No Life, But I Can Die, What Am I?",
+      "answer": "battery"
+    },
+    {
+      "content": "The More Of This There Is, The Less You See. What Is It?",
+      "answer": "Darkness"
+    },
+    {
+      "content": "Where is an ocean with no water?",
+      "answer": "map"
+    },
+    {
+      "content": "What Has Legs But Doesn’t Walk?",
+      "answer": "table"
+    },
+    {
+      "content": "What Has Words But Never Speaks?",
+      "answer": "book"
+    },
+    {
+      "content": "What Has A Head And A Tail But No Body?",
+      "answer": "coin"
+    },
+    {
+      "content": "What Is 3/7 Chicken, 2/3 Cat And 2/4 Goat?",
+      "answer": "Chicago"
+    },
+    {
+      "content": "What Can Fill A Room But Takes Up No Space?",
+      "answer": "Light"
+    },
+    {
+      "content": "What Goes Through Cities And Fields But Never Moves?",
+      "answer": "road"
     }
   ]
 }

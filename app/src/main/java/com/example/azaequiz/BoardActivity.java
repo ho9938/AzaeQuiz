@@ -113,9 +113,8 @@ public class BoardActivity extends AppCompatActivity {
         @Override
         public void onSuccess(Text text) {
             Log.d("recogBitmap", "success");
-            String result = text.getText().trim().toUpperCase();
+            String result = text.getText().replaceAll("\\s+","");
             boolean is_correct = checkAnswerDialog.isCorrect(question_answer, result);
-//            notifyText(result);
 
             startSubmitActivity();
 
