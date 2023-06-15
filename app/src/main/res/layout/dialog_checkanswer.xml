@@ -5,10 +5,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <RelativeLayout
-        android:layout_width="700dp"
+        android:layout_width="500dp"
         android:layout_height="300dp"
         android:layout_margin="50dp"
-        android:background="#aaaaaa"
+        android:background="@drawable/sketchbook"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -53,7 +53,7 @@
 
         <Button
             android:id="@+id/check_btn1"
-            android:layout_width="150dp"
+            android:layout_width="100dp"
             android:layout_height="70dp"
             android:layout_alignParentBottom="true"
             android:layout_toStartOf="@+id/check_btn2"
@@ -61,12 +61,12 @@
             android:text="GO BACK"
             android:gravity="center"
             android:padding="10dp"
-            android:visibility="invisible"
+            android:visibility="visible"
             />
 
         <Button
             android:id="@+id/check_btn2"
-            android:layout_width="150dp"
+            android:layout_width="100dp"
             android:layout_height="70dp"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
@@ -74,12 +74,12 @@
             android:text="RETRY"
             android:gravity="center"
             android:padding="10dp"
-            android:visibility="invisible"
+            android:visibility="visible"
             />
 
         <Button
             android:id="@+id/check_btn3"
-            android:layout_width="150dp"
+            android:layout_width="100dp"
             android:layout_height="70dp"
             android:layout_alignParentBottom="true"
             android:layout_toEndOf="@+id/check_btn2"
@@ -87,7 +87,7 @@
             android:text="GO NEXT"
             android:gravity="center"
             android:padding="10dp"
-            android:visibility="invisible"
+            android:visibility="visible"
             />
 
         <TextView
@@ -101,7 +101,7 @@
             android:padding="10dp"
             android:text="5 Problems to WIN!"
             android:textSize="30sp"
-            android:visibility="visible"
+            android:visibility="invisible"
             />
 
     </RelativeLayout>
