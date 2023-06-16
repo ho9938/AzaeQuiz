@@ -88,7 +88,8 @@ public class ManagerActivity extends AppCompatActivity {
         intent.putExtra("success", success);
 
         startActivity(intent);
-        new Handler().postDelayed(this::finish, 5000);
+        finish();
+//        new Handler().postDelayed(this::finish, 5000);
     }
 
     ActivityResultCallback<ActivityResult> boardResultHandler = result -> {
